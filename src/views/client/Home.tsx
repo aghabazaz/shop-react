@@ -1,5 +1,5 @@
-import Layout from "../components/layout/layout";
-const home = () => {
+import Layout from "../../components/layout/layout";
+const Home = () => {
   return (
     <>
       <Layout>
@@ -364,4 +364,4 @@ const home = () => {
     </>
   );
 };
-export default home;
+export default Home;

@@ -1,5 +1,9 @@
-import Layout from "../components/layout/layout";
-const about = () => {
+import Layout from "../../components/layout/layout";
+import { useTranslation } from 'react-i18next';
+
+const About = () => {
+  const {t, i18n} = useTranslation(['About']); // "home" is namespace
+
   return (
     <>
       <Layout>
@@ -25,6 +29,7 @@ const about = () => {
                     do eiusmod tempor incididunt ut labore et dolore magna
                     aliqua. Ut enim ad minim veniam, quis nostrud exercitation
                     ullamco laboris nisi ut aliquip ex ea commodo consequat.{" "}
+                    {t("greeting")}
                   </p>
                   <a className="read_more" href="#">
                     Read More
@@ -46,4 +51,4 @@ const about = () => {
   );
 };
 
-export default about;
+export default About;
