@@ -1,7 +1,9 @@
 import http from "../http-common";
 import IProduct from "../types/product.type"
+import authHeader from "./auth-header";
 class ProductDataService {
   getAll() {
+    //return http.get<Array<IProduct>>("/products",{'headers':authHeader()});
     return http.get<Array<IProduct>>("/products");
   }
   get(id: string) {
