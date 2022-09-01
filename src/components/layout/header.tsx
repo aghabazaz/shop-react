@@ -87,7 +87,7 @@ const header=()=>{
                                     <a className="nav-link" href="products.html">Products</a>
                                  </li>
                                  <li className="nav-item">
-                                    <a className="nav-link" href="fashion.html">Fashion</a>
+                                    <Link  to="/admin/login" className="nav-link" >Login</Link>
                                  </li>
                                  <li className="nav-item">
                                     <a className="nav-link" href="news.html">News</a>
