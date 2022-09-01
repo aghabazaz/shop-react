@@ -111,6 +111,7 @@ const Login = () => {
                             <button
                               type="submit"
                               className="btn btn-primary btn-user btn-block"
+                              disabled={formik.isSubmitting}
                             >
                               Login
                             </button>
