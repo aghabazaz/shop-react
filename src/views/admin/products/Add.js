@@ -17,7 +17,7 @@ const Add = () => {
     description: "",
     image: "",
   };
-  const [formValues, setFormValues] = useState(intialValues);
+  const [formValues, setFormValues] = useState<product>(intialValues);
   const [formErrors, setFormErrors] = useState([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { t, i18n } = useTranslation();

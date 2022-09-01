@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route,Switch, Navigate } from "react-router-dom"
 
 const About = lazy(() => import("../views/client/About"));
 const Home = lazy(() => import("../views/client/Home"));
-const AddProduct = lazy(() => import("../views/admin/products/Add"));
+const AddProduct = lazy(() => import("../views/admin/products/AddFormik"));
 const Index = lazy(() => import("../views/admin/Index"));
 const Login = lazy(() => import("../views/admin/Login"));
 const ListProductAdmin = lazy(() => import("../views/admin/products/List"));
