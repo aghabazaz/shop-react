@@ -24,7 +24,7 @@ const AddFormik = () => {
         image: Yup.string().required(),
         description: Yup.string(),
       })}
-      onSubmit= {async (values, { setSubmitting }) => {
+      onSubmit= {async (values, { setSubmitting ,resetForm}) => {
         try {
           const result =await ProductDataService.create(values);
           console.log("result", result.data);
@@ -40,6 +40,7 @@ const AddFormik = () => {
           return error;
         } finally {
           setSubmitting(false)
+          resetForm(values)
         }
       }}
     >
