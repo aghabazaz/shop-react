@@ -19,7 +19,7 @@ const Routers = () => {
             <Route path="products" element={<ListProductAdmin />} />
             <Route path="products/add" element={<AddProduct />} />
           </Route>
-          <Route path="admin/login" element={<Login/>}/>
+          <Route path="/admin/login" element={<Login/>}/>
         </Routes>
       </BrowserRouter>
     </Suspense>

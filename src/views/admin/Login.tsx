@@ -1,7 +1,44 @@
 import "../../assets/css/sb-admin-2.min.css";
+import { Formik } from "formik";
+import AuthService from "../../services/auth.service";
+import * as Yup from "yup"
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+import { useNavigate   } from "react-router-dom";
+
+const MySwal = withReactContent(Swal);
+
 const Login = () => {
+  const navigate  = useNavigate();
+  const initialValues={
+    username:'mor_2314',
+    password:'83r5^_'
+  }
   return (
     <>
+    <Formik
+      initialValues={initialValues}
+      validationSchema={Yup.object().shape({
+        username: Yup.string().max(255).required(),
+        password: Yup.string().required(),
+      })}
+      onSubmit={async (values,{setSubmitting,resetForm})=>{
+        try {
+          const result =await AuthService.login(values);
+          console.log("result", result.data);
+          if (result.status === 200) {
+            localStorage.setItem('token',result.data.token)
+            navigate('/admin');
+
+          }
+        } catch (error) {
+          return error;
+        } finally {
+          setSubmitting(false)
+        }
+      }}
+    >
+      {formik => (
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-xl-10 col-lg-12 col-md-9">
@@ -14,14 +51,15 @@ const Login = () => {
                       <div className="text-center">
                         <h1 className="h4 text-gray-900 mb-4">Welcome Back!</h1>
                       </div>
-                      <form className="user">
+                      <form className="user" onSubmit={formik.handleSubmit}>
                         <div className="form-group">
                           <input
-                            type="email"
+                            type="username"
                             className="form-control form-control-user"
-                            id="exampleInputEmail"
-                            aria-describedby="emailHelp"
-                            placeholder="Enter Email Address..."
+                            id="exampleInputUsername"
+                            aria-describedby="username"
+                            placeholder="Enter Username Address..."
+                            {...formik.getFieldProps('username')}
                           />
                         </div>
                         <div className="form-group">
@@ -30,6 +68,7 @@ const Login = () => {
                             className="form-control form-control-user"
                             id="exampleInputPassword"
                             placeholder="Password"
+                            {...formik.getFieldProps('password')}
                           />
                         </div>
                         <div className="form-group">
@@ -47,12 +86,12 @@ const Login = () => {
                             </label>
                           </div>
                         </div>
-                        <a
-                          href="index.html"
+                        <button 
+                          type="submit"
                           className="btn btn-primary btn-user btn-block"
                         >
                           Login
-                        </a>
+                        </button>
                         <hr />
                         <a
                           href="index.html"
@@ -88,6 +127,8 @@ const Login = () => {
           </div>
         </div>
       </div>
+      )}
+      </Formik>
     </>
   );
 };
