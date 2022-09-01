@@ -1,8 +1,14 @@
 import { FormEvent, useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { handleFormValues } from "../../../utils/handleForms";
+import ProductDataService from "../../../services/products.service";
+
+import product from "../../../types/product.type";
 import * as Yup from "yup";
-import { Formik } from "formik";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+
+const MySwal = withReactContent(Swal);
 const Add = () => {
   const intialValues = {
     title: "",
@@ -12,22 +18,18 @@ const Add = () => {
     image: "",
   };
   const [formValues, setFormValues] = useState(intialValues);
-  const [formErrors, setFormErrors] = useState({});
+  const [formErrors, setFormErrors] = useState([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { t, i18n } = useTranslation(); // "home" is namespace
-  /* const [title, setTitle] = useState<string>("");
-  const [price, setPrice] = useState<string>("");
-  const [category, setCategory] = useState<string>("");
-  const [description, setDescription] = useState<string | undefined>("");
-  const [image, setImage] = useState<string>("");*/
-  const handleResetState = (): void => {};
-  /*const schema=Joi.object({
-    title: Joi.string().max(255).required(),
-    price:Joi.string().required(),
-    category:Joi.string().required(),
-    image:Joi.string().required(),
-    description:Joi.string()
-  })*/
+  const { t, i18n } = useTranslation();
+  const handleResetState = (): void => {
+    setFormValues({
+      title: "",
+      price: "",
+      category: "",
+      description: "",
+      image: "",
+    });
+  };
   const schema = Yup.object().shape({
     title: Yup.string().max(255).required(),
     price: Yup.string().required(),
@@ -50,12 +52,26 @@ const Add = () => {
       const result = await schema.validate(formValues, { abortEarly: false });
       return result;
     } catch (error) {
-      console.log(error.errors);
       setFormErrors(error.errors);
     }
   };
-  const submitForm = () => {
-    console.log(formValues);
+  const submitForm = async () => {
+    try {
+      const result = await ProductDataService.create(formValues);
+      console.log("result", result);
+      if (result.status === 200) {
+        MySwal.fire({
+          title: "success!",
+          text: "Success done!",
+          icon: "success",
+          button: "ok!",
+        });
+      }
+    } catch (error) {
+      return error;
+    } finally {
+      handleResetState();
+    }
   };
   useEffect(() => {
     if (Object.keys(formErrors).length === 0 && isSubmitting) {
@@ -64,88 +80,99 @@ const Add = () => {
   }, [formErrors]);
   return (
     <>
-      {formErrors.length > 0 && (
-        <div className="alert alert-danger">
-          <ul>
-            {formErrors.map((error,index) => <li key={index}>{error} </li>)}
-          </ul>
-        </div>
-      )}
-      <div className="container">
-        <form onSubmit={handleSubmit}>
-          <div className="mb-3">
-            <label htmlFor="inputTitle" className="form-label">
-              product name:
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="inputTitle"
-              name="title"
-              aria-describedby="titleHelp"
-              value={formValues.title}
-              onChange={handleChange}
-            />
-            <div id="titleHelp" className="form-text">
-              We'll never share your title with anyone else.
+      <div className="container-fluid">
+        <div className="card shadow mb-4">
+          <div className="card-header py-3">
+            <h6 className="m-0 font-weight-bold text-primary">Add Product</h6>
+          </div>
+          <div className="card-body">
+            {formErrors.length > 0 && (
+              <div className="alert alert-danger">
+                <ul>
+                  {formErrors.map((error, index) => (
+                    <li key={index}>{error} </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            <div className="container">
+              <form onSubmit={handleSubmit}>
+                <div className="mb-3">
+                  <label htmlFor="inputTitle" className="form-label">
+                    product name:
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="inputTitle"
+                    name="title"
+                    aria-describedby="titleHelp"
+                    value={formValues.title}
+                    onChange={handleChange}
+                  />
+                  <div id="titleHelp" className="form-text">
+                    We'll never share your title with anyone else.
+                  </div>
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="inputPrice" className="form-label">
+                    Price
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="inputText"
+                    name="price"
+                    value={formValues.price}
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="inputCategory" className="form-label">
+                    Price
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="inputCategory"
+                    name="category"
+                    value={formValues.category}
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="inputImage" className="form-label">
+                    Image
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="inputImage"
+                    name="image"
+                    value={formValues.image}
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="inputDescription" className="form-label">
+                    Description
+                  </label>
+                  <textarea
+                    name="description"
+                    className="form-control"
+                    id="inputDescription"
+                    value={formValues.description}
+                    onChange={handleChange}
+                  />
+                </div>
+
+                <button type="submit" className="btn btn-primary">
+                  Submit
+                </button>
+              </form>
             </div>
           </div>
-          <div className="mb-3">
-            <label htmlFor="inputPrice" className="form-label">
-              Price
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="inputText"
-              name="price"
-              value={formValues.price}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="inputCategory" className="form-label">
-              Price
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="inputCategory"
-              name="category"
-              value={formValues.category}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="inputImage" className="form-label">
-              Image
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="inputImage"
-              name="image"
-              value={formValues.image}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="inputDescription" className="form-label">
-              Description
-            </label>
-            <textarea
-              name="description"
-              className="form-control"
-              id="inputDescription"
-              value={formValues.description}
-              onChange={handleChange}
-            />
-          </div>
-
-          <button type="submit" className="btn btn-primary">
-            Submit
-          </button>
-        </form>
+        </div>
       </div>
     </>
   );

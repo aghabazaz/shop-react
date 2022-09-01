@@ -18,7 +18,6 @@ const Routers = () => {
           <Route path="/admin" element={<Index />}>
             <Route path="products" element={<ListProductAdmin />} />
             <Route path="products/add" element={<AddProduct />} />
-           
           </Route>
           <Route path="admin/login" element={<Login/>}/>
         </Routes>
