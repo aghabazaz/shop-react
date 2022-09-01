@@ -1,4 +1,4 @@
-const edit=()=>{
+const Edit=()=>{
     return (<></>)
 }
-export default edit
+export default Edit

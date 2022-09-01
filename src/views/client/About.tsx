@@ -29,7 +29,7 @@ const About = () => {
                     do eiusmod tempor incididunt ut labore et dolore magna
                     aliqua. Ut enim ad minim veniam, quis nostrud exercitation
                     ullamco laboris nisi ut aliquip ex ea commodo consequat.{" "}
-                    {t("greeting")}
+                    {t('greeting')}
                   </p>
                   <a className="read_more" href="#">
                     Read More

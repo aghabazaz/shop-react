@@ -3,7 +3,7 @@ import call from '../../assets/images/call.png'
 import logo from '../../assets/images/logo.png'
 import email from '../../assets/images/email.png'
 import shopping from '../../assets/images/shopping.png'
-import { NavLink  } from "react-router-dom";
+import { Link, NavLink  } from "react-router-dom";
 const header=()=>{
     return (
         <><header>
