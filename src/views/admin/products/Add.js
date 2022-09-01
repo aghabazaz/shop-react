@@ -14,7 +14,7 @@ const Add = () => {
   const [formValues, setFormValues] = useState(intialValues);
   const [formErrors, setFormErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { t, i18n } = useTranslation(["add"]); // "home" is namespace
+  const { t, i18n } = useTranslation(); // "home" is namespace
   /* const [title, setTitle] = useState<string>("");
   const [price, setPrice] = useState<string>("");
   const [category, setCategory] = useState<string>("");
