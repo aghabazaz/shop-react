@@ -6,6 +6,9 @@ class ProductDataService {
     //return http.get<Array<IProduct>>("/products",{'headers':authHeader()});
     return http.get<Array<IProduct>>("/products");
   }
+  getLimit(limit: number) {
+    return http.get<IProduct>(`/products`,{ params: { limit: limit} });
+  }
   get(id: string) {
     return http.get<IProduct>(`/products/${id}`);
   }

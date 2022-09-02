@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route,Switch, Navigate } from "react-router-dom"
 
 const About = lazy(() => import("../views/client/About"));
 const Home = lazy(() => import("../views/client/Home"));
+const Products = lazy(() => import("../views/client/Products/Index"));
 const AddProduct = lazy(() => import("../views/admin/products/AddFormik"));
 const Index = lazy(() => import("../views/admin/Index"));
 const Login = lazy(() => import("../views/admin/Login"));
@@ -15,6 +16,7 @@ const Routers = () => {
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Navigate to="/" replace />} />
           <Route path="/about" element={<About />} />
+          <Route path="/products" element={<Products />} />
           <Route path="/admin" element={<Index />}>
             <Route path="products" element={<ListProductAdmin />} />
             <Route path="products/add" element={<AddProduct />} />
