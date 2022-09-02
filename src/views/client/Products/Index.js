@@ -13,7 +13,8 @@ const Index = () => {
   useEffect(() => {
     setIsLoading(true);
     const products = ProductDataService.getLimit(count).then((res) => {
-      setProducts(res.data);        
+      setProducts(res.data);  
+      setIsLoading(false);      
   })}, [count]);
   const showMore = () => {
     setCount(count + 5);
