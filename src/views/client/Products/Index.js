@@ -14,8 +14,6 @@ const Index = () => {
     setIsLoading(true);
     const products = ProductDataService.getLimit(count).then((res) => {
       setProducts(res.data);        
-      
-
   })}, [count]);
   const showMore = () => {
     setCount(count + 5);
