@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom";
+
 const Sidebar = () => {
 
     return <>
@@ -25,11 +27,11 @@ const Sidebar = () => {
     
         
                 <li className="nav-item">
-                    <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                    <NavLink className="nav-link collapsed" to="/admin/products" data-toggle="collapse" data-target="#collapseTwo"
                         aria-expanded="true" aria-controls="collapseTwo">
                         <i className="fas fa-fw fa-cog"></i>
                         <span>Products</span>
-                    </a>
+                    </NavLink>
                     <div id="collapseTwo" className="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                         <div className="bg-white py-2 collapse-inner rounded">
                             <h6 className="collapse-header">Custom Components:</h6>

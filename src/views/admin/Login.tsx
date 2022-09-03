@@ -20,7 +20,7 @@ const Login = () => {
       const user = JSON.parse(data);
       if (user && user.token) {
         setUser(user);
-        navigate("/admin");
+        navigate("/admin/products");
       }
     }
   }, []);
@@ -49,7 +49,7 @@ const Login = () => {
                   token: result.data.token,
                 })
               );
-              navigate("/admin");
+              navigate("/admin/products");
             }
           } catch (error) {
             return error;
