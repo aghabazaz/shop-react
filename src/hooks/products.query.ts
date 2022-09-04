@@ -22,7 +22,8 @@ const useDeleteProduct=(id:number)=>{
         }
       })
 }
-/*const useUpdateProduct=(data:IProduct,id:any)=>{
+
+/*const useUpdateProduct=(data:IProduct,id:number)=>{
     const queryClient = useQueryClient()
     return useMutation(productService.update, {
         onSuccess: data => {
@@ -30,5 +31,6 @@ const useDeleteProduct=(id:number)=>{
         }
       })
 }*/
+
 export {useAllProducts}
 

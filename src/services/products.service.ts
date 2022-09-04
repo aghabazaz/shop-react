@@ -18,8 +18,8 @@ class ProductDataService {
   create(data: IProduct) {
     return http.post<IProduct>("/products", data);
   }
-  update(data: IProduct, id: any) {
-    return http.put<any>(`/products/${id}`, data);
+  update(data: IProduct, id: number) {
+    return http.put<any>(`/products/${id}`, data).then((res)=>res.data);
   }
   delete(id: any) {
     return http.delete<any>(`/products/${id}`);
