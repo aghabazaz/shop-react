@@ -10,10 +10,10 @@ class ProductDataService {
     return http.get('/products').then((response) => response.data)
   }
   getLimit(limit: number) {
-    return http.get<IProduct>(`/products`,{ params: { limit: limit} }).then((res)=>res.data);
+    return http.get<IProduct[]>(`/products`,{ params: { limit: limit} }).then((res)=>res.data);
   }
   get(id: string) {
-    return http.get<IProduct>(`/products/${id}`);
+    return http.get<IProduct>(`/products/${id}`).then((res)=>res.data);
   }
   create(data: IProduct) {
     return http.post<IProduct>("/products", data);
