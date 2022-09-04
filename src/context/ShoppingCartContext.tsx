@@ -10,20 +10,20 @@ type ShoppingCartProviderProps = {
 type CartItem = {
   id: number;
   quantity: number;
-  image:string;
-  title:string;
-  price:number
+  image: string;
+  title: string;
+  price: number;
 };
 
 type ShoppingCartContext = {
   openCart: () => void;
   closeCart: () => void;
   getItemQuantity: (id: number) => number;
-  increaseCartQuantity: (selProduct:any) => void;
+  increaseCartQuantity: (selProduct: any) => void;
   decreaseCartQuantity: (id: number) => void;
   removeFromCart: (id: number) => void;
-  cartQuantity:number;
-  cartItems:CartItem[];
+  cartQuantity: number;
+  cartItems: CartItem[];
 };
 
 const ShoppingCartContext = createContext({} as ShoppingCartContext);
@@ -34,13 +34,16 @@ export function UseShoppingCart() {
 
 export function ShoppingCartProvicer({ children }: ShoppingCartProviderProps) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [cartItems, setCartItems] = useLocalStorage<CartItem[]>("shopping-cart",[]);
+  const [cartItems, setCartItems] = useLocalStorage<CartItem[]>(
+    "shopping-cart",
+    []
+  );
 
   function getItemQuantity(id: number) {
     return cartItems.find((item) => item.id === id)?.quantity || 0;
   }
 
-  function increaseCartQuantity(selProduct:any) {
+  function increaseCartQuantity(selProduct: any) {
     setCartItems((currItems) => {
       if (currItems.find((item) => item.id === selProduct.id) == null) {
         return [...currItems, { ...selProduct, quantity: 1 }];
@@ -78,10 +81,13 @@ export function ShoppingCartProvicer({ children }: ShoppingCartProviderProps) {
     });
   }
 
-  const openCart=()=>setIsOpen(true)
-  const closeCart=()=>setIsOpen(false)
+  const openCart = () => setIsOpen(true);
+  const closeCart = () => setIsOpen(false);
 
-  const cartQuantity=cartItems.reduce((quantity,item)=>item.quantity+quantity,0)
+  const cartQuantity = cartItems.reduce(
+    (quantity, item) => item.quantity + quantity,
+    0
+  );
   return (
     <ShoppingCartContext.Provider
       value={{
@@ -92,11 +98,11 @@ export function ShoppingCartProvicer({ children }: ShoppingCartProviderProps) {
         cartItems,
         cartQuantity,
         openCart,
-        closeCart
+        closeCart,
       }}
     >
       {children}
-      <ShoppingCart isOpen={isOpen}/>
+      <ShoppingCart isOpen={isOpen} />
     </ShoppingCartContext.Provider>
   );
 }

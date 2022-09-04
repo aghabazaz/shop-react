@@ -6,21 +6,12 @@ import { BiEditAlt } from "react-icons/bi";
 import { MdDeleteSweep } from "react-icons/md";
 import { VscGitPullRequestCreate } from "react-icons/vsc";
 import Loading from "../../../components/default/Loading";
+import {useAllProducts} from "../../../hooks/products.query"
 const List = () => {
   const navigate=useNavigate();
-  const [products, setProducts] = useState<Product[]>([]);
-  const [isLoading, setIsLoading] = useState<Boolean>(true);
-  useEffect(() => {
-    const products = ProductDataService.getAll().then((res) => {
-      setProducts(res.data);
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 50);
-    });
-  }, []);
-
-  const renderList: JSX.Element | JSX.Element[] = products.map((product) => (
-    <tr>
+  const {data,isLoading}=useAllProducts()
+  const renderList: JSX.Element | JSX.Element[] | undefined = data && data.map((product:any) => (
+    <tr key={product.id}>
       <td> {product.id}</td>
       <td>{product.title}</td>
       <td>$ {product.price} </td>

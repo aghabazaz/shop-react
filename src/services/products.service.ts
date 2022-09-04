@@ -2,12 +2,15 @@ import http from "../http-common";
 import IProduct from "../types/product.type"
 import authHeader from "./auth-header";
 class ProductDataService {
-  getAll() {
+  /*getAll() {
     //return http.get<Array<IProduct>>("/products",{'headers':authHeader()});
-    return http.get<Array<IProduct>>("/products");
+    return http.get<Array<IProduct>>("/products").then((res)=>res.data);
+  }*/
+  getAll(): Promise<IProduct[]> {
+    return http.get('/products').then((response) => response.data)
   }
   getLimit(limit: number) {
-    return http.get<IProduct>(`/products`,{ params: { limit: limit} });
+    return http.get<IProduct>(`/products`,{ params: { limit: limit} }).then((res)=>res.data);
   }
   get(id: string) {
     return http.get<IProduct>(`/products/${id}`);
