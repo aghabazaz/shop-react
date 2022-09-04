@@ -1,8 +1,6 @@
-import Layout from "../../components/layout/layout";
 const Home = () => {
   return (
     <>
-      <Layout>
         <section className="banner_main">
           <div className="container">
             <div className="row">
@@ -360,7 +358,6 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </Layout>
     </>
   );
 };

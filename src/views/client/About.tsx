@@ -1,4 +1,3 @@
-import Layout from "../../components/layout/layout";
 import { useTranslation } from 'react-i18next';
 
 const About = () => {
@@ -6,7 +5,6 @@ const About = () => {
 
   return (
     <>
-      <Layout>
         <div className="blue_bg">
           <div className="container">
             <div className="row">
@@ -46,7 +44,6 @@ const About = () => {
             </div>
           </div>
         </div>
-      </Layout>
     </>
   );
 };

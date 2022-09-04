@@ -1,10 +1,12 @@
 import React, { Suspense, lazy } from "react";
 import { BrowserRouter, Routes, Route,Switch, Navigate } from "react-router-dom";
-
+//client
 const About = lazy(() => import("../views/client/About"));
 const Home = lazy(() => import("../views/client/Home"));
 const Products = lazy(() => import("../views/client/Products/Index"));
 const ProductsContext = lazy(() => import("../views/client/Products/IndexContext"));
+const IndexClient=lazy(() => import("../views/client/Index"))
+//admin
 const AddProduct = lazy(() => import("../views/admin/products/AddFormik"));
 const Index = lazy(() => import("../views/admin/Index"));
 const Login = lazy(() => import("../views/admin/Login"));
@@ -14,11 +16,15 @@ const Routers = () => {
     <Suspense fallback={<h1>loading</h1>}>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/home" element={<Navigate to="/" replace />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/productsContext" element={<ProductsContext />} />
+          <Route path="/"  element={<IndexClient />}>
+              <Route path="/" element={<Home />} />
+              <Route path="/home" element={<Navigate to="/" replace />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/products" element={<Products />} />
+              <Route path="/productsContext" element={<ProductsContext />} />
+          </Route>
+         
+          
           <Route path="/admin" element={<Index />}>
             <Route path="products" element={<ListProductAdmin />} />
             <Route path="products/add" element={<AddProduct />} />

@@ -658,7 +658,7 @@ ul.right_icon li img {
   line-height: 20px;
   padding: 22px 0px 0px 0px;
   text-align: left;
-  height:100px;
+  height:120px;
 }
 
 .project .read_more {
@@ -1026,4 +1026,10 @@ ul.right_icon li img {
      width:230px;
      padding-right: 10px;
      padding-left: 10px;
+}
+.project .project_box h5{
+
+  padding: 22px 0px 0px 0px;
+  text-align: left;
+  height: 100px;
 }

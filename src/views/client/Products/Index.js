@@ -2,7 +2,7 @@ import Layout from "../../../components/layout/layout";
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import ProductDataService from "../../../services/products.service";
-import Product from "../../../components/views/products/Product";
+import Product from "../../../components/views/products/ProductComponent";
 import Loading from "../../../components/default/Loading";
 
 const Index = () => {
@@ -21,7 +21,6 @@ const Index = () => {
   };
   return (
     <>
-      <Layout>
         <div className="blue_bg">
           <div className="container">
             <div className="row">
@@ -38,7 +37,7 @@ const Index = () => {
             <div className="row">
               <div className="product_main">
                 {products.length >0 ?products.map((item, index) => (
-                    <Product product={item} index={index} key={index}/>
+                    <Product {...item}  key={index}/>
                 )):<Loading/>}
                 { products.length>0 &&
                 <div className="col-md-12" >
@@ -51,7 +50,6 @@ const Index = () => {
             </div>
           </div>
         </div>
-      </Layout>
     </>
   );
 };

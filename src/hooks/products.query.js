@@ -5,3 +5,7 @@ import { useQuery } from "react-query";
 const useAllProducts=()=>{
     return useQuery("products",productService.getAll)
 }
+
+
+
+

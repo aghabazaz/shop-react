@@ -22,7 +22,6 @@ const Index = () => {
   };
   return (
     <>
-      <Layout>
         <div className="blue_bg">
           <div className="container">
             <div className="row">
@@ -54,7 +53,6 @@ const Index = () => {
             </div>
           </div>
         </div>
-      </Layout>
     </>
   );
 };

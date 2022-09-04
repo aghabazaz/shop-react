@@ -2,7 +2,7 @@ import Layout from "../../../components/layout/layout";
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import ProductDataService from "../../../services/products.service";
-import Product from "../../../components/views/products/Product";
+import Product from "../../../components/views/products/ProductComponent";
 import Loading from "../../../components/default/Loading";
 
 const Index = () => {

@@ -4,7 +4,9 @@ import logo from "../../assets/images/logo.png";
 import email from "../../assets/images/email.png";
 import shopping from "../../assets/images/shopping.png";
 import { Link, NavLink } from "react-router-dom";
+import { UseShoppingCart } from "../../context/ShoppingCartContext";
 const header = () => {
+  const {openCart,cartQuantity}=UseShoppingCart()
   return (
     <>
       <header>
@@ -92,9 +94,11 @@ const header = () => {
                 <div className="col-md-4">
                   <ul className="right_icon d_none1">
                     <li>
-                      <a href="#">
+                      <a href="#" onClick={openCart}>
                         <img src={shopping} alt="#" />
-                      </a>{" "}
+                        <div className="rounded-circle bg-danger d-flex justify-content-center align-center-item" style={{marginRight:'30px'}}>{cartQuantity}</div>
+                      </a>
+                      
                     </li>
                     <a href="#" className="order">
                       Order Now
